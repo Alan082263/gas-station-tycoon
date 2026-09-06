@@ -4,6 +4,9 @@ out/
 build/
 bin/
 
+# Downloaded JavaFX jars (fetched by run-gui.sh)
+lib/
+
 # IDEs
 .idea/
 *.iml

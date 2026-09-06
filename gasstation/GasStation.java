@@ -34,6 +34,7 @@ public class GasStation {
     private final FuelTank tank;
     private final List<Pump> pumps = new ArrayList<>();
     private final List<Transaction> sales = new ArrayList<>();
+    private final List<Attendant> attendants = new ArrayList<>();
 
     private BigDecimal pricePerLitre;
     private double reserveFraction = DEFAULT_RESERVE_FRACTION;
@@ -198,6 +199,19 @@ public class GasStation {
     /** How many pumps the station currently has. */
     public int getPumpCount() {
         return pumps.size();
+    }
+
+    // ------------------------------------------------------------------
+    // Staff
+    // ------------------------------------------------------------------
+
+    /** Takes on a new attendant to work the forecourt. */
+    public void hireAttendant(Attendant attendant) {
+        attendants.add(Objects.requireNonNull(attendant, "attendant"));
+    }
+
+    public List<Attendant> getAttendants() {
+        return Collections.unmodifiableList(attendants);
     }
 
     /**

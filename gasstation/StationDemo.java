@@ -15,9 +15,12 @@ public class StationDemo {
 
     public static void main(String[] args) {
         GasStation station = new GasStation("Riverside Fuels", 10_000, 1_500, new BigDecimal("1.729"));
+        station.hireAttendant(new Attendant("Jamie", 19));
+        station.hireAttendant(new Attendant("Kofi", 22));
 
         banner("OPENING UP");
         System.out.println(station.getStatus());
+        System.out.println("  Attendants on shift: " + station.getAttendants());
         System.out.printf("Tank is below the %.0f%% reserve, so the first sale will trigger a delivery.%n",
                 station.getReserveFraction() * 100);
 

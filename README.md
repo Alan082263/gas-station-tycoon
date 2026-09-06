@@ -32,12 +32,19 @@ java gasstation.StationDemo                            # the underlying model, n
 java gasstation.game.BalanceCheck 300 normal           # 300 automated playthroughs
 java gasstation.game.BalanceCheck sweep normal         # profit vs price curve
 java SelfTest                                          # 25 checks on the model
+
+./run-gui.sh                                           # the JavaFX desktop version
 ```
 
 Flags: `--easy` / `--hard`, `--seed=N` (replay an exact run), `--days=N`,
 `--name=TEXT`.
 
 Requires JDK 8 or newer. No external libraries.
+
+`run-gui.sh` needs a JDK with JavaFX available at run time (any JDK works — it
+fetches the three `org.openjfx` jars it needs from Maven Central into `lib/`
+the first time it runs, then points `javac`/`java` at them with
+`--module-path`). No Maven/Gradle involved.
 
 ## How the game works
 
@@ -103,6 +110,16 @@ of the game existed, and it still runs as one (`StationDemo`).
 | `GasStationTycoon` | The console game. |
 | `BalanceCheck` | Automated playtesting. |
 
+**`gasstation.gui`** — a JavaFX desktop front end. It is a second orchestrator
+over the exact same `GameConfig`/`Business`/`Market`/`GasStation`/`DaySimulator`
+the console game uses — same rules, same balance, just buttons and dialogs
+instead of a terminal prompt.
+
+| Class | Responsibility |
+|---|---|
+| `GasStationTycoonFX` | The JavaFX app: intro screen, dashboard, day report, ending. |
+| `ActionDialogs` | The five morning actions (price, fuel, upgrades, loan, help) as modal dialogs. |
+
 Notes on a couple of decisions:
 
 - **Money is `BigDecimal` throughout.** Pump prices carry three decimals
@@ -138,4 +155,4 @@ is the shape a pricing game wants.
 - A rival station that reprices against you instead of a fixed going rate.
 - Staff, opening hours, and queue tolerance as separate levers.
 - A save file, so a run can be resumed.
-- A Swing or web front end over the same `DaySimulator`.
+- A mobile or web front end over the same `DaySimulator` (there's a JavaFX desktop one now — see `gasstation.gui`).
