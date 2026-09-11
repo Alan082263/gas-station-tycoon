@@ -18,3 +18,7 @@ lib/
 # OS
 .DS_Store
 Thumbs.db
+
+# C++ build output
+cpp/build/
+gasstation/game/gasstation_tycoon
